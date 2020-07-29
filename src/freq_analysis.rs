@@ -34,3 +34,20 @@ pub fn have_bad_digraphs(a: Vec<u8>) -> bool {
 
     false
 }
+
+pub fn have_frequency_chars(a: Vec<u8>, pct: f64) -> bool {
+    let frequent: [char; 6] = ['e', 't', 'a', 'o', 'i', 'n'];
+    let mut count = 0;
+
+    for i in &frequent {
+        for b in &a {
+            if *i == *b as char {
+                count += 1;
+            }
+        }
+    }
+
+    let p_calc: f64 = ((count*100)/a.len()) as f64;
+
+    p_calc < pct
+}
