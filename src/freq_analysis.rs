@@ -65,3 +65,19 @@ pub fn have_freq_punctuation(a: Vec<u8>, pct: f64) -> bool {
 
     p_calc < pct
 }
+
+pub fn have_english_words(a: Vec<u8>) -> bool {
+    let words: [&str; 10] = [
+        "the", "and", "have", "that", "for", "you", "with", "say", "this", "they",
+    ];
+
+    let s: String = a.into_iter().map(|c| c as char).collect();
+
+    for i in &words {
+        if s.contains(i) {
+            return true;
+        }
+    }
+
+    false
+}
