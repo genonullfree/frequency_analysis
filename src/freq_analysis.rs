@@ -35,7 +35,7 @@ pub fn have_bad_digraphs(a: Vec<u8>) -> bool {
     false
 }
 
-pub fn have_frequency_chars(a: Vec<u8>, pct: f64) -> bool {
+pub fn have_freq_chars(a: Vec<u8>, pct: f64) -> bool {
     let frequent: [char; 6] = ['e', 't', 'a', 'o', 'i', 'n'];
     let mut count = 0;
 
@@ -47,7 +47,21 @@ pub fn have_frequency_chars(a: Vec<u8>, pct: f64) -> bool {
         }
     }
 
-    let p_calc: f64 = ((count*100)/a.len()) as f64;
+    let p_calc: f64 = ((count * 100) / a.len()) as f64;
+
+    p_calc > pct
+}
+
+pub fn have_freq_punctuation(a: Vec<u8>, pct: f64) -> bool {
+    let mut count = 0;
+
+    for b in &a {
+        if b.is_ascii_punctuation() {
+            count += 1;
+        }
+    }
+
+    let p_calc: f64 = ((count * 100) / a.len()) as f64;
 
     p_calc < pct
 }
