@@ -1,7 +1,13 @@
 pub fn printable_ascii(a: &Vec<u8>) -> bool {
-    let s: String = a.into_iter().map(|c| *c as char).collect();
+    let mut count = 0;
+    for i in a {
+        if !i.is_ascii_graphic() && !i.is_ascii_whitespace() {
+            return false;
+        }
+        count += 1;
+    }
 
-    s.is_ascii()
+    true
 }
 
 pub fn have_vowels(a: &Vec<u8>) -> bool {
@@ -37,7 +43,7 @@ pub fn have_bad_digraphs(a: &Vec<u8>) -> bool {
 }
 
 pub fn have_freq_chars(a: &Vec<u8>, pct: f64) -> bool {
-    let frequent: [char; 6] = ['e', 't', 'a', 'o', 'i', 'n'];
+    let frequent: [char; 12] = ['e', 't', 'a', 'o', 'i', 'n', 's', 'h', 'r', 'd', 'l', 'u'];
     let mut count = 0;
 
     for i in &frequent {
